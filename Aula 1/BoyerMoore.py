@@ -25,7 +25,7 @@ class BoyerMoore:
         self.s = [0] * (len(self.pattern) + 1) #abrir uma lista de 0's com o tamanho do padrao
         i = len(self.pattern)
         j = i + 1 #define o i e j pelo comprimento do padrão
-        self.f[i] = j #altera o ultimo elemento da lista f para o valor de f
+        self.f[i] = j #altera o ultimo elemento da lista f para o valor de j
         while i > 0:
             while j <= len(self.pattern) and self.pattern[i-1] != self.pattern[j-1]: #lista s, lista que significa o numero de casas que pode avançar caso não encaixe no padrao
                 if self.s[j] == 0:
