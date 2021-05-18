@@ -34,15 +34,13 @@ class BoyerMoore:
             i = i - 1
             j = j - 1
             self.f[i] = j
-        j = self.f[0]
-        
+        j = self.f[0]    
         for i in range(0, len(self.pattern)):
             if self.s[i] == 0:
                 self.s[i] = j
             if i == j:
                 j = self.f[j]
-            
-        
+                   
     def search_pattern(self, text):
         res = []
         i = 0 #posição na sequencia
@@ -55,8 +53,7 @@ class BoyerMoore:
                 i = i + self.s[0]
             else:
                 c = text[j + i]
-                i += max(self.s[j+1],j - self.occ[c])
-                
+                i += max(self.s[j+1],j - self.occ[c])      
         return res
 
 def test():
