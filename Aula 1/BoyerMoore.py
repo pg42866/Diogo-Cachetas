@@ -13,21 +13,21 @@ class BoyerMoore:
         
     def process_bcr(self): 
         """Implementação do pre-processamento do bad caracter rule"""
-        self.occ = {} #tamanho do padrao=occ
-        for c in self.alphabet:
-            self.occ[c] = -1 #se o carater nao ocorre no padrao será =-1
+        self.occ = {} #cria dicionário
+        for c in self.alphabet: #adiciona ao dicionario todas as letras do alfabeto com valor -1
+            self.occ[c] = -1
         for i in range(len(self.pattern)):
-            self.occ[self.pattern[i]] = i #ultima posição onde o carater ocore no padrao
+            self.occ[self.pattern[i]] = i #altera no dicionario a letra no pattern para valor i
      
     def process_gsr(self): #2 casos: sufixo ocorre de novo no padrao, ou um sufixo do match é parte do prefixo do padrao
         """Implementação do pre-processamento do good suffix rule"""
-        self.f = [0] * (len(self.pattern) + 1)
-        self.s = [0] * (len(self.pattern) + 1)
+        self.f = [0] * (len(self.pattern) + 1) #abrir uma lista com o 0 com o tamanho do padrao
+        self.s = [0] * (len(self.pattern) + 1) #abrir uma lista com o 0 com o tamanho do padrao
         i = len(self.pattern)
-        j = i + 1
-        self.f[i] = j
+        j = i + 1 #define o i e j pelo comprimento do padrão
+        self.f[i] = j #altera o ultimo elemento da lista f para o valor de f
         while i > 0:
-            while j <= len(self.pattern) and self.pattern[i-1] != self.pattern[j-1]:
+            while j <= len(self.pattern) and self.pattern[i-1] != self.pattern[j-1]: #lista s, lista que significa o numero de casas que pode avançar caso não encaixe no padrao
                 if self.s[j] == 0:
                     self.s[j] = j-i
                 j = self.f[j]
@@ -35,7 +35,7 @@ class BoyerMoore:
             j = j - 1
             self.f[i] = j
         j = self.f[0]    
-        for i in range(0, len(self.pattern)):
+        for i in range(0, len(self.pattern)): #quando definido como 0 alterar para o valor de j mais recente, que significa passar o restante da cadeia.
             if self.s[i] == 0:
                 self.s[i] = j
             if i == j:
@@ -44,16 +44,16 @@ class BoyerMoore:
     def search_pattern(self, text):
         res = []
         i = 0 #posição na sequencia
-        while i <= (len(text) - len(self.pattern)):
+        while i <= (len(text) - len(self.pattern)): #para começar a correr a sequencia
             j = len(self.pattern) - 1 #posição no padrão
-            while j >= 0 and self.pattern[j] == text[j + i]:
+            while j >= 0 and self.pattern[j] == text[j + i]: #continuar a correr enquanto houver match
                 j = j -1 
             if j < 0:
                 res.append(i)
-                i = i + self.s[0]
+                i = i + self.s[0] #avançar para i "casas" para a frente como j<0 significa que deu match com um padrão
             else:
                 c = text[j + i]
-                i += max(self.s[j+1],j - self.occ[c])      
+                i += max(self.s[j+1],j - self.occ[c]) #avançar uma sequencia dependo do GSR e BCR
         return res
 
 def test():
