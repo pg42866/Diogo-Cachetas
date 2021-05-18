@@ -21,8 +21,8 @@ class BoyerMoore:
      
     def process_gsr(self): #2 casos: sufixo ocorre de novo no padrao, ou um sufixo do match é parte do prefixo do padrao
         """Implementação do pre-processamento do good suffix rule"""
-        self.f = [0] * (len(self.pattern) + 1) #abrir uma lista com o 0 com o tamanho do padrao
-        self.s = [0] * (len(self.pattern) + 1) #abrir uma lista com o 0 com o tamanho do padrao
+        self.f = [0] * (len(self.pattern) + 1) #abrir uma lista de 0's com o tamanho do padrao
+        self.s = [0] * (len(self.pattern) + 1) #abrir uma lista de 0's com o tamanho do padrao
         i = len(self.pattern)
         j = i + 1 #define o i e j pelo comprimento do padrão
         self.f[i] = j #altera o ultimo elemento da lista f para o valor de f
