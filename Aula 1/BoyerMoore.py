@@ -11,7 +11,7 @@ class BoyerMoore:
         self.process_bcr()
         self.process_gsr()
         
-    def process_bcr(self): #2 casos: sufixo ocorre de novo no padrao, ou um sufixo do match é parte do prefixo do padrao
+    def process_bcr(self): 
         """Implementação do pre-processamento do bad caracter rule"""
         self.occ = {} #tamanho do padrao=occ
         for c in self.alphabet:
@@ -19,7 +19,7 @@ class BoyerMoore:
         for i in range(len(self.pattern)):
             self.occ[self.pattern[i]] = i #ultima posição onde o carater ocore no padrao
      
-    def process_gsr(self):
+    def process_gsr(self): #2 casos: sufixo ocorre de novo no padrao, ou um sufixo do match é parte do prefixo do padrao
         """Implementação do pre-processamento do good suffix rule"""
         self.f = [0] * (len(self.pattern) + 1)
         self.s = [0] * (len(self.pattern) + 1)
