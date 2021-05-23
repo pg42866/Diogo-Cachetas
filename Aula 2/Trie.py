@@ -11,24 +11,24 @@ class Trie:
             print (k, "->" , self.nodes[k]) 
     
     def add_node(self, origin, symbol):
-        self.num += 1
-        self.nodes[origin][symbol] = self.num
-        self.nodes[self.num] = {}
+        self.num += 1 #contador
+        self.nodes[origin][symbol] = self.num #atribui a cada nuc uma edge
+        self.nodes[self.num] = {} #abre um novo dicionário no dicionário
     
     def add_pattern(self, p):
         pos = 0
         node = 0
         while pos < len(p):
-            if p[pos] not in self.nodes[node].keys() :
-                self.add_node(node, p[pos])
-            node = self.nodes[node][p[pos]]
-            pos += 1
+            if p[pos] not in self.nodes[node].keys(): #chave do dicionário, ou seja os nucleotidos
+                self.add_node(node, p[pos]) #cria node com o numero, e nuc
+            node = self.nodes[node][p[pos]] #dá a edge e o nucleotido
+            pos += 1 #aumenta 1
             
-    def trie_from_patterns(self, pats):
+    def trie_from_patterns(self, pats): #vai buscar os padroes
      for p in pats:
          self.add_pattern(p)
             
-    def prefix_trie_match(self, text):
+    def prefix_trie_match(self, text): 
         pos = 0
         match = ""
         node = 0
@@ -41,7 +41,7 @@ class Trie:
             else: return None
         return None
         
-    def trie_matches(self, text):
+    def trie_matches(self, text): 
         res = []
         for i in range(len(text)):
             m = self.prefix_trie_match(text[i:])
