@@ -121,7 +121,7 @@ def test2():
 def test3():
     seq1 = "TACTA"
     seq2 = "ATGAC"
-    st = SuffixTree_2Seq()
+    st = SuffixTree()
     st.suffix_tree_from_seq(seq1, seq2)
     st.print_tree()
     print(st.nodes_below(0))
